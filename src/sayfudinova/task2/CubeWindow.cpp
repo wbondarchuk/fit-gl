@@ -5,23 +5,22 @@
 #include <QOpenGLFunctions>
 #include <QScreen>
 
-struct VertexData{
-  VertexData(){ }
-  VertexData(QVector3D p) :
-      position(p){ }
+struct VertexData {
+  VertexData() {}
+  VertexData(QVector3D p) : position(p) {}
   QVector3D position;
 };
 
 void CubeWindow::initCube(float width, int N) {
-  float halfWidth = width/2;
-  float step = width/float(N-1);
+  float halfWidth = width / 2;
+  float step = width / float(N - 1);
 
   QVector<VertexData> vertices;
   for (auto z = -halfWidth; z <= halfWidth; z += width) {
     for (auto j = 0; j < N; j++) {
       for (auto i = 0; i < N; i++) {
         vertices.append(VertexData(
-            QVector3D(-halfWidth + i*step, -halfWidth + j * step, z)));
+            QVector3D(-halfWidth + i * step, -halfWidth + j * step, z)));
       }
     }
   }
@@ -29,7 +28,7 @@ void CubeWindow::initCube(float width, int N) {
     for (auto k = 0; k < N; k++) {
       for (auto j = 0; j < N; j++) {
         vertices.append(VertexData(
-            QVector3D(x, -halfWidth + j *step, halfWidth - k*step)));
+            QVector3D(x, -halfWidth + j * step, halfWidth - k * step)));
       }
     }
   }
@@ -37,14 +36,14 @@ void CubeWindow::initCube(float width, int N) {
     for (auto i = 0; i < N; i++) {
       for (auto k = 0; k < N; k++) {
         vertices.append(VertexData(
-            QVector3D(-halfWidth + i * step, y, halfWidth - k*step)));
+            QVector3D(-halfWidth + i * step, y, halfWidth - k * step)));
       }
     }
   }
 
   QVector<GLuint> indices;
   for (int i = 0; i < 6 * N * N; i += N * N) {
-    for (int j = 0; j < (N-1) * (N-1); j += N) {
+    for (int j = 0; j < (N - 1) * (N - 1); j += N) {
       for (int k = 0; k < (N - 1); k++) {
         indices.append(i + j + k + N);
         indices.append(i + j + k + 0);
@@ -58,12 +57,11 @@ void CubeWindow::initCube(float width, int N) {
 
   vbo.create();
   vbo.bind();
-  vbo.allocate(vertices.constData(),vertices.size()*sizeof(VertexData));
+  vbo.allocate(vertices.constData(), vertices.size() * sizeof(VertexData));
 
   ibo.create();
   ibo.bind();
-  ibo.allocate(indices.constData(),indices.size()*sizeof(GLuint));
-
+  ibo.allocate(indices.constData(), indices.size() * sizeof(GLuint));
 }
 
 void CubeWindow::init() {
@@ -88,7 +86,6 @@ void CubeWindow::init() {
   // Configure attributes and uniforms
   posAttr_ = program_->attributeLocation("posAttr");
   matrixUniform_ = program_->uniformLocation("matrix");
-
 }
 
 void CubeWindow::render() {
