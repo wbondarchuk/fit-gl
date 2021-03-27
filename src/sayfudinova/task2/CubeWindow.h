@@ -12,7 +12,6 @@
 #include <QVector3D>
 #include <memory>
 #include <chrono>
-#include <ctime>
 
 class CubeWindow final : public fgl::GLWindow {
 

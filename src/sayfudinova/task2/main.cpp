@@ -1,6 +1,5 @@
 #include <QApplication>
 #include <QSurfaceFormat>
-#include <iostream>
 
 #include "CubeWindow.h"
 

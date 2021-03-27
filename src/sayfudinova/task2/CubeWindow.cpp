@@ -92,8 +92,7 @@ void CubeWindow::init() {
 }
 
 void CubeWindow::render() {
-  auto end = std::chrono::system_clock::now();
-  time_ = end - start;
+  time_ = std::chrono::system_clock::now() - start;
 
   // Configure viewport
   const auto retinaScale = devicePixelRatio();
